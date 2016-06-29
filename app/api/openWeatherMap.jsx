@@ -17,6 +17,3 @@ module.exports = {
     });
   }
 }
-//e7f5cd6dce9249bb65b32abb7df8a538
-
-//api.openweathermap.org/data/2.5/weather?q=London
