@@ -58,6 +58,7 @@
 
 	var Main = __webpack_require__(216);
 	var Weather = __webpack_require__(218);
+	var About = __webpack_require__(219);
 
 	ReactDOM.render(React.createElement(
 	  Router,
@@ -65,6 +66,7 @@
 	  React.createElement(
 	    Route,
 	    { path: '/', component: Main },
+	    React.createElement(Route, { path: 'about', component: About }),
 	    React.createElement(IndexRoute, { component: Weather })
 	  )
 	), document.getElementById('app'));
@@ -24850,6 +24852,28 @@
 	});
 
 	module.exports = Weather;
+
+/***/ },
+/* 219 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+
+	var About = React.createClass({
+	  displayName: 'About',
+
+	  render: function render() {
+	    return React.createElement(
+	      'h1',
+	      null,
+	      'About Page'
+	    );
+	  }
+	});
+
+	module.exports = About;
 
 /***/ }
 /******/ ]);
