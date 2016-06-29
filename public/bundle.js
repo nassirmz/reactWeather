@@ -58,8 +58,8 @@
 
 	var Main = __webpack_require__(216);
 	var Weather = __webpack_require__(218);
-	var About = __webpack_require__(220);
-	var Examples = __webpack_require__(221);
+	var About = __webpack_require__(221);
+	var Examples = __webpack_require__(222);
 
 	ReactDOM.render(React.createElement(
 	  Router,
@@ -24866,11 +24866,26 @@
 
 	var React = __webpack_require__(1);
 	var WeatherForm = __webpack_require__(219);
+	var WeatherMessage = __webpack_require__(220);
 
 	var Weather = React.createClass({
 	  displayName: 'Weather',
 
+	  getInitialState: function getInitialState() {
+	    return {
+	      city: 'Miami',
+	      temp: 88
+	    };
+	  },
+	  handleSearch: function handleSearch(city) {
+	    this.setState({
+	      city: city,
+	      temp: 23
+	    });
+	  },
 	  render: function render() {
+	    var temp = this.state.temp;
+	    var city = this.state.city;
 	    return React.createElement(
 	      'div',
 	      null,
@@ -24879,7 +24894,8 @@
 	        null,
 	        'Weather Component'
 	      ),
-	      React.createElement(WeatherForm, null)
+	      React.createElement(WeatherForm, { onSearch: this.handleSearch }),
+	      React.createElement(WeatherMessage, { temp: temp, city: city })
 	    );
 	  }
 	});
@@ -24890,22 +24906,34 @@
 /* 219 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	var React = __webpack_require__(1);
 
 	var WeatherForm = React.createClass({
-	  displayName: "WeatherForm",
+	  displayName: 'WeatherForm',
 
+	  onFormSubmit: function onFormSubmit(e) {
+	    e.preventDefault();
+	    var city = this.refs.city.value;
+	    if (city.length > 0) {
+	      this.refs.city.value = '';
+	      this.props.onSearch(city);
+	    }
+	  },
 	  render: function render() {
 	    return React.createElement(
-	      "div",
+	      'div',
 	      null,
-	      React.createElement("input", { type: "text", placeholder: "Enter city name", ref: "city" }),
 	      React.createElement(
-	        "button",
-	        null,
-	        "Get Weather"
+	        'form',
+	        { onSubmit: this.onFormSubmit },
+	        React.createElement('input', { type: 'text', placeholder: 'Enter city name', ref: 'city' }),
+	        React.createElement(
+	          'button',
+	          null,
+	          'Get Weather'
+	        )
 	      )
 	    );
 	  }
@@ -24915,6 +24943,37 @@
 
 /***/ },
 /* 220 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+
+	var WeatherMessage = React.createClass({
+	  displayName: 'WeatherMessage',
+
+	  render: function render() {
+	    var city = this.props.city;
+	    var temp = this.props.temp;
+	    return React.createElement(
+	      'div',
+	      null,
+	      React.createElement(
+	        'h3',
+	        null,
+	        'Its ',
+	        temp,
+	        ' in ',
+	        city
+	      )
+	    );
+	  }
+	});
+
+	module.exports = WeatherMessage;
+
+/***/ },
+/* 221 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24936,7 +24995,7 @@
 	module.exports = About;
 
 /***/ },
-/* 221 */
+/* 222 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
