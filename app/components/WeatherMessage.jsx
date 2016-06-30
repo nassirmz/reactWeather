@@ -4,7 +4,7 @@ var WeatherMessage = ({temp, city}) => {
 
   return (
     <div>
-      <h3>Its {temp} in {city}</h3>
+      <h3 className="text-center">Its {temp} in {city}</h3>
     </div>
   );
 };
